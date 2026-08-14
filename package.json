@@ -1,0 +1,9 @@
+{
+  "name": "tanglirong-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "唐莉蓉个人作品集网站",
+  "scripts": {
+    "dev": "node server.js"
+  }
+}

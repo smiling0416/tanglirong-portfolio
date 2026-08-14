@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>唐莉蓉 · 金融科技 × AI 产品经理</title>
+    <link rel="preload" as="image" href="cover-bg-web.jpg" media="(min-width: 769px)">
+    <link rel="preload" as="image" href="cover-bg-mobile-web.jpg" media="(max-width: 768px)">
+    <link rel="preload" as="image" href="home-bg.jpg">
+    <link rel="preload" as="image" href="photo1-web.jpg">
+    <link rel="preload" as="image" href="photo2.jpg">
+    <link rel="preload" as="image" href="photo3-web.jpg">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -36,10 +42,10 @@
             z-index: 100; display: flex; flex-direction: column;
             align-items: center; justify-content: center;
             transition: opacity 1.2s cubic-bezier(0.4,0,0.2,1), transform 1.2s cubic-bezier(0.4,0,0.2,1);
-            background: url('cover-bg-mobile.png') center center / cover no-repeat;
+            background: url('cover-bg-mobile-web.jpg') center center / cover no-repeat;
         }
         @media (min-width: 769px) {
-            #cover { background: url('cover-bg-new.jpg') center center / cover no-repeat; }
+            #cover { background: url('cover-bg-web.jpg') center center / cover no-repeat; }
         }
         #cover.leaving { opacity: 0; transform: translateY(-40px) scale(0.98); pointer-events: none; }
         #water-canvas {
@@ -296,14 +302,34 @@
         .tarot-container { width: 100%; max-width: 1000px; margin: 0 auto; padding: 80px 40px 60px; position: relative; z-index: 1; }
         .tarot-title { font-size: 2rem; font-weight: 600; color: var(--deep-blue); text-align: center; margin-bottom: 12px; letter-spacing: 0.1em; }
         .tarot-subtitle { font-size: 1rem; color: #999; text-align: center; margin-bottom: 48px; font-family: 'Dancing Script', cursive; }
-        .tarot-deck { display: flex; justify-content: center; gap: 40px; flex-wrap: nowrap; perspective: 1200px; }
+        .tarot-hint { font-size: 0.82rem; color: #aaa; text-align: center; margin: -32px 0 40px; letter-spacing: 0.08em; }
+        .tarot-deck { position: relative; height: 340px; max-width: 900px; margin: 0 auto; perspective: 1200px; }
+        .tarot-slot {
+            position: absolute; left: 50%; top: 0; width: 180px; height: 280px;
+            transform: translateX(-50%) rotate(var(--sr, 0deg));
+            transition: transform 0.65s cubic-bezier(0.34, 1.25, 0.64, 1);
+            cursor: pointer; z-index: 1;
+        }
+        .tarot-deck.spread .tarot-slot { transform: translateX(calc(-50% + var(--sx, 0px))) translateY(-6px) rotate(var(--fx, 0deg)); }
+        .tarot-deck.spread .tarot-slot:hover { transform: translateX(calc(-50% + var(--sx, 0px))) translateY(-26px) rotate(0deg) scale(1.05); z-index: 10; }
         .tarot-card {
-            width: 180px; height: 280px; border-radius: 16px; cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.4,0,0.2,1); position: relative;
+            width: 100%; height: 100%; border-radius: 16px; position: relative;
+            transition: transform 0.55s cubic-bezier(0.4,0,0.2,1);
             box-shadow: 0 8px 32px rgba(0,0,0,0.08); transform-style: preserve-3d;
         }
-        .tarot-card:hover { transform: translateY(-12px) rotateY(8deg); box-shadow: 0 20px 48px rgba(0,0,0,0.12); }
+        .tarot-slot:hover .tarot-card { box-shadow: 0 20px 48px rgba(0,0,0,0.14); }
         .tarot-card.flipped { transform: rotateY(180deg); }
+        .tarot-front-icon { font-size: 1.9rem; margin-bottom: 4px; }
+        .tarot-slogan { font-size: 0.7rem; color: var(--gold); font-weight: 600; letter-spacing: 0.05em; margin-top: 3px; text-align: center; }
+        .tarot-front-tags { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+        .tarot-front-tags span { background: linear-gradient(135deg, rgba(126,200,168,0.15), rgba(135,206,235,0.12)); color: var(--deep-blue); font-size: 0.6rem; padding: 2px 8px; border-radius: 12px; border: 1px solid rgba(126,200,168,0.25); font-weight: 500; }
+        .tarot-enter {
+            margin-top: 10px; padding: 6px 16px; border-radius: 20px;
+            background: linear-gradient(135deg, var(--mint), var(--sky)); color: #fff;
+            font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em;
+            box-shadow: 0 3px 10px rgba(126,200,168,0.35); transition: all 0.3s ease;
+        }
+        .tarot-enter:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 6px 16px rgba(126,200,168,0.45); }
         .tarot-card-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 16px; backface-visibility: hidden; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
         .tarot-back-pattern { width: 100%; height: 100%; display: block; border-radius: 16px; }
         .tarot-card-front { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 16px; backface-visibility: hidden; transform: rotateY(180deg); background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.6); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); }
@@ -315,9 +341,6 @@
         /* ===== 项目详情页 ===== */
         #project-workflow, #project-assistant, #project-game, #project-todo { background: linear-gradient(180deg, rgba(243,229,245,0.88) 0%, rgba(250,245,255,0.88) 100%), url('home-bg.jpg') center center / cover no-repeat; }
         .project-detail-container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 60px 50px 60px; position: relative; z-index: 1; }
-        .project-detail-back { display: inline-flex; align-items: center; gap: 6px; color: var(--mint); font-size: 0.85rem; cursor: pointer; margin-bottom: 20px; transition: all 0.3s; font-weight: 500; }
-        .project-detail-back:hover { color: var(--deep-blue); transform: translateX(-4px); }
-        .project-detail-back svg { width: 16px; height: 16px; }
         .project-page-title { font-family: 'Pacifico', cursive; font-size: 2.5rem; color: var(--deep-blue); text-align: center; margin-bottom: 40px; letter-spacing: 0.05em; }
         .project-list { display: flex; flex-direction: column; gap: 32px; }
         .project-item { display: flex; gap: 32px; align-items: flex-start; background: rgba(255,255,255,0.75); backdrop-filter: blur(12px); border-radius: 20px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.04), 0 0 0 1px rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.5); transition: all 0.4s ease; }
@@ -362,6 +385,15 @@
         .magazine-item-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); flex-shrink: 0; }
         .magazine-item-text { font-size: 0.85rem; color: #666; }
         .magazine-placeholder { font-size: 0.8rem; color: #bbb; font-style: italic; text-align: center; padding: 24px; }
+        .magazine-link { font-size: 0.85rem; color: var(--deep-blue); text-decoration: none; line-height: 1.5; transition: color 0.25s ease; display: inline; background: linear-gradient(90deg, var(--mint), var(--sky)) left bottom / 0% 1.5px no-repeat; padding-bottom: 2px; }
+        .magazine-link:hover { color: var(--text-green); background-size: 100% 1.5px; }
+        .magazine-link .magazine-src { display: block; font-size: 0.68rem; color: #aaa; margin-top: 2px; letter-spacing: 0.03em; }
+        .magazine-updated { font-size: 0.68rem; color: var(--gold); text-align: right; margin-top: 10px; letter-spacing: 0.08em; opacity: 0.85; }
+        .muse-item { padding: 9px 10px; border-radius: 10px; border-left: 3px solid rgba(126,200,168,0.5); background: rgba(255,255,255,0.35); margin-bottom: 8px; cursor: default; transition: background 0.3s ease; }
+        .muse-item:hover { background: rgba(255,255,255,0.7); }
+        .muse-q { font-size: 0.85rem; color: var(--deep-blue); font-weight: 600; line-height: 1.5; }
+        .muse-a { font-size: 0.75rem; color: #888; line-height: 1.6; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.45s ease, opacity 0.45s ease, margin-top 0.45s ease; margin-top: 0; }
+        .muse-item:hover .muse-a, .muse-item.touched .muse-a { max-height: 80px; opacity: 1; margin-top: 4px; }
 
         /* 年度总结 - 卡片堆叠 */
         .year-stack { width: 220px; height: 300px; position: relative; cursor: pointer; margin: 0 auto; }
@@ -415,6 +447,33 @@
         .trophy-medal .trophy-emoji { font-size: 2.2rem; margin-bottom: 12px; }
         .trophy-reserved { color: #bbb; font-style: italic; font-size: 0.8rem; }
 
+        /* ===== 科技感交互增强 ===== */
+        #particle-canvas {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 150; pointer-events: none;
+        }
+        .shine { position: relative; overflow: hidden; }
+        .shine::after {
+            content: ''; position: absolute; inset: 0; border-radius: inherit; z-index: 5;
+            background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.38), rgba(212,175,55,0.08) 45%, transparent 65%);
+            opacity: 0; transition: opacity 0.4s ease; pointer-events: none;
+        }
+        .shine:hover::after { opacity: 1; }
+        .tilt { transition: transform 0.25s ease, box-shadow 0.25s ease; will-change: transform; }
+        .welcome-letter {
+            pointer-events: auto; cursor: default;
+            transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), color 0.35s ease, text-shadow 0.35s ease;
+        }
+        .welcome-letter:hover {
+            transform: translateY(-14px) scale(1.12) rotate(-4deg);
+            color: var(--gold-light);
+            text-shadow: 0 4px 30px rgba(212,175,55,0.8), 0 0 80px rgba(244,208,63,0.5);
+        }
+        .nav-card-icon { transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1); }
+        .nav-card:hover .nav-card-icon { transform: translateY(-4px) scale(1.2) rotate(-6deg); }
+        .home-container { transition: transform 0.35s ease-out; }
+        #home::before { transition: transform 0.35s ease-out; }
+
         /* ===== 响应式 ===== */
         @media (max-width: 900px) {
             .home-container { padding: 80px 20px 20px; gap: 20px; justify-content: flex-start; overflow-y: auto; }
@@ -426,8 +485,10 @@
             .nav-cards { grid-template-columns: repeat(2, 1fr); gap: 20px; }
             .timeline-container { padding: 80px 20px 40px; }
             .tarot-container { padding: 80px 20px 40px; }
-            .tarot-deck { gap: 16px; }
-            .tarot-card { width: 140px; height: 210px; }
+            .tarot-deck { height: auto; display: grid; grid-template-columns: repeat(2, auto); justify-content: center; gap: 34px 20px; padding-bottom: 12px; }
+            .tarot-slot { position: static; transform: none !important; width: 150px; height: 236px; }
+            .tarot-deck.spread .tarot-slot, .tarot-deck.spread .tarot-slot:hover { transform: none; }
+            .tarot-hint { margin: -20px 0 28px; }
             .magazine-container { padding: 80px 20px 40px; }
             .magazine-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
             .magazine-block.wide { grid-column: span 2; }
@@ -471,7 +532,7 @@
             .year-stack { width: 180px; height: 240px; }
             .year-card-label { font-size: 0.7rem; padding: 4px 10px; }
             .year-d { width: 8px; height: 8px; }
-            .tarot-deck { flex-wrap: wrap; gap: 24px 12px; padding-bottom: 32px; }
+            .tarot-deck { gap: 30px 12px; }
             .tarot-card-label { font-size: 0.75rem; }
             .magazine-block-content { padding: 16px 16px; }
             .year-hint { font-size: 0.72rem; }
@@ -503,7 +564,7 @@
             .magazine-grid { grid-template-columns: 1fr; }
             .magazine-block.wide { grid-column: span 1; }
             .trophy-card { width: 160px; }
-            .tarot-card { width: 120px; height: 180px; }
+            .tarot-slot { width: 132px; height: 206px; }
         }
         @media (max-width: 480px) {
             .nav-cards { grid-template-columns: 1fr; gap: 12px; }
@@ -511,8 +572,10 @@
             .bio-title { font-size: 1.15rem; }
             .bio-text { font-size: 0.82rem; }
             .trophy-card { width: 140px; }
-            .tarot-card { width: 100px; height: 150px; }
+            .tarot-slot { width: 118px; height: 186px; }
             .tarot-name { font-size: 0.75rem; }
+            .tarot-detail { font-size: 0.62rem; }
+            .tarot-enter { font-size: 0.62rem; padding: 5px 12px; }
             .timeline-container { padding: 70px 16px 40px; }
             .timeline { padding-left: 24px; }
             .timeline-dot { left: -24px; width: 16px; height: 16px; border-width: 3px; }
@@ -613,9 +676,9 @@
                 <!-- 左侧 - 照片扇形堆叠 -->
                 <div class="photo-section">
                     <div class="photo-stack" id="photo-stack" onclick="nextPhoto()">
-                        <div class="stack-card" data-pos="2" data-idx="2"><img src="photo3.jpg" alt="照片3"><div class="photo-label">花海漫步</div></div>
-                        <div class="stack-card" data-pos="1" data-idx="1"><img src="photo2.jpg" alt="照片2"><div class="photo-label">Summer Vibe</div></div>
-                        <div class="stack-card" data-pos="0" data-idx="0"><img src="photo1.png" alt="照片1"><div class="photo-label">日常碎片</div></div>
+                        <div class="stack-card" data-pos="2" data-idx="2"><img src="photo3-web.jpg" alt="照片3" decoding="async"><div class="photo-label">花海漫步</div></div>
+                        <div class="stack-card" data-pos="1" data-idx="1"><img src="photo2.jpg" alt="照片2" decoding="async"><div class="photo-label">Summer Vibe</div></div>
+                        <div class="stack-card" data-pos="0" data-idx="0"><img src="photo1-web.jpg" alt="照片1" decoding="async"><div class="photo-label">日常碎片</div></div>
                     </div>
                     <div class="photo-dots" id="photo-dots">
                         <div class="photo-dot active" onclick="setPhoto(0); event.stopPropagation();"></div>
@@ -847,77 +910,118 @@
         <div class="tarot-container">
             <h2 class="tarot-title">灵犀华章</h2>
             <p class="tarot-subtitle">Pick a card, explore the project</p>
-            <div class="tarot-deck">
-                <div class="tarot-card" onclick="goToPage('project-workflow')">
-                    <div class="tarot-card-back">
-                        <svg class="tarot-back-pattern" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="tbg1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#E8F6F3"/><stop offset="100%" style="stop-color:#D6EAF8"/></linearGradient>
-                                <linearGradient id="tstar1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#7EC8A8"/><stop offset="100%" style="stop-color:#D4AF37"/></linearGradient>
-                            </defs>
-                            <rect width="100" height="160" rx="8" fill="url(#tbg1)" stroke="rgba(126,200,168,0.3)" stroke-width="1"/>
-                            <circle cx="50" cy="35" r="18" fill="none" stroke="url(#tstar1)" stroke-width="1.5" opacity="0.6"/>
-                            <path d="M50 22 L53 32 L63 32 L55 38 L58 48 L50 42 L42 48 L45 38 L37 32 L47 32 Z" fill="url(#tstar1)" opacity="0.8"/>
-                            <circle cx="30" cy="80" r="4" fill="url(#tstar1)" opacity="0.5"/>
-                            <circle cx="70" cy="80" r="4" fill="url(#tstar1)" opacity="0.5"/>
-                            <circle cx="50" cy="110" r="6" fill="url(#tstar1)" opacity="0.4"/>
-                            <path d="M50 130 L50 145" stroke="url(#tstar1)" stroke-width="2" opacity="0.5"/>
-                            <circle cx="50" cy="148" r="3" fill="url(#tstar1)" opacity="0.6"/>
-                        </svg>
+            <p class="tarot-hint" id="tarot-hint">滑过牌堆，卡牌展开 · 点击翻面，遇见灵感</p>
+            <div class="tarot-deck" id="tarot-deck">
+                <div class="tarot-slot" style="--sx:-292px; --fx:-8deg; --sr:-4deg;" onclick="flipTarot(this, event)">
+                    <div class="tarot-card">
+                        <div class="tarot-card-back">
+                            <svg class="tarot-back-pattern" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="tbg1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#E8F6F3"/><stop offset="100%" style="stop-color:#D6EAF8"/></linearGradient>
+                                    <linearGradient id="tstar1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#7EC8A8"/><stop offset="100%" style="stop-color:#D4AF37"/></linearGradient>
+                                </defs>
+                                <rect width="100" height="160" rx="8" fill="url(#tbg1)" stroke="rgba(126,200,168,0.3)" stroke-width="1"/>
+                                <circle cx="50" cy="35" r="18" fill="none" stroke="url(#tstar1)" stroke-width="1.5" opacity="0.6"/>
+                                <path d="M50 22 L53 32 L63 32 L55 38 L58 48 L50 42 L42 48 L45 38 L37 32 L47 32 Z" fill="url(#tstar1)" opacity="0.8"/>
+                                <circle cx="30" cy="80" r="4" fill="url(#tstar1)" opacity="0.5"/>
+                                <circle cx="70" cy="80" r="4" fill="url(#tstar1)" opacity="0.5"/>
+                                <circle cx="50" cy="110" r="6" fill="url(#tstar1)" opacity="0.4"/>
+                                <path d="M50 130 L50 145" stroke="url(#tstar1)" stroke-width="2" opacity="0.5"/>
+                                <circle cx="50" cy="148" r="3" fill="url(#tstar1)" opacity="0.6"/>
+                            </svg>
+                        </div>
+                        <div class="tarot-card-front">
+                            <div class="tarot-front-icon">⚙️</div>
+                            <div class="tarot-name">提效工作流</div>
+                            <div class="tarot-slogan">让 AI 接管重复劳动</div>
+                            <div class="tarot-detail">聚焦金融营销与合规的智能化改造：Dify 一键生成营销物料 × 保险材料 AI 质检平台，产能翻倍、风险可控。</div>
+                            <div class="tarot-front-tags"><span>Dify</span><span>质检</span><span>自动化</span></div>
+                            <div class="tarot-enter" onclick="goToPage('project-workflow'); event.stopPropagation();">查看详细脉络 →</div>
+                        </div>
                     </div>
                     <div class="tarot-card-label">提效工作流</div>
                 </div>
-                <div class="tarot-card" onclick="goToPage('project-assistant')">
-                    <div class="tarot-card-back">
-                        <svg class="tarot-back-pattern" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="tbg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#F3E5F5"/><stop offset="100%" style="stop-color:#E1BEE7"/></linearGradient>
-                                <linearGradient id="tstar2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#87CEEB"/><stop offset="100%" style="stop-color:#D4AF37"/></linearGradient>
-                            </defs>
-                            <rect width="100" height="160" rx="8" fill="url(#tbg2)" stroke="rgba(135,206,235,0.3)" stroke-width="1"/>
-                            <path d="M50 30 C40 30 35 40 35 50 C35 60 45 65 50 70 C55 65 65 60 65 50 C65 40 60 30 50 30" fill="none" stroke="url(#tstar2)" stroke-width="1.5" opacity="0.6"/>
-                            <circle cx="50" cy="50" r="8" fill="url(#tstar2)" opacity="0.5"/>
-                            <circle cx="25" cy="85" r="3" fill="url(#tstar2)" opacity="0.4"/>
-                            <circle cx="75" cy="85" r="3" fill="url(#tstar2)" opacity="0.4"/>
-                            <circle cx="50" cy="115" r="5" fill="url(#tstar2)" opacity="0.5"/>
-                            <path d="M50 130 L50 145" stroke="url(#tstar2)" stroke-width="2" opacity="0.4"/>
-                        </svg>
+                <div class="tarot-slot" style="--sx:-97px; --fx:-3deg; --sr:-1.5deg;" onclick="flipTarot(this, event)">
+                    <div class="tarot-card">
+                        <div class="tarot-card-back">
+                            <svg class="tarot-back-pattern" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="tbg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#F3E5F5"/><stop offset="100%" style="stop-color:#E1BEE7"/></linearGradient>
+                                    <linearGradient id="tstar2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#87CEEB"/><stop offset="100%" style="stop-color:#D4AF37"/></linearGradient>
+                                </defs>
+                                <rect width="100" height="160" rx="8" fill="url(#tbg2)" stroke="rgba(135,206,235,0.3)" stroke-width="1"/>
+                                <path d="M50 30 C40 30 35 40 35 50 C35 60 45 65 50 70 C55 65 65 60 65 50 C65 40 60 30 50 30" fill="none" stroke="url(#tstar2)" stroke-width="1.5" opacity="0.6"/>
+                                <circle cx="50" cy="50" r="8" fill="url(#tstar2)" opacity="0.5"/>
+                                <circle cx="25" cy="85" r="3" fill="url(#tstar2)" opacity="0.4"/>
+                                <circle cx="75" cy="85" r="3" fill="url(#tstar2)" opacity="0.4"/>
+                                <circle cx="50" cy="115" r="5" fill="url(#tstar2)" opacity="0.5"/>
+                                <path d="M50 130 L50 145" stroke="url(#tstar2)" stroke-width="2" opacity="0.4"/>
+                            </svg>
+                        </div>
+                        <div class="tarot-card-front">
+                            <div class="tarot-front-icon">🤖</div>
+                            <div class="tarot-name">AI助手</div>
+                            <div class="tarot-slogan">可信赖的金融对话体验</div>
+                            <div class="tarot-detail">AI 股票分析师 × 养老平台小顾问 × 京小贝：从多信源投研到千万级养老数据库，让 AI 真正懂金融业务上下文。</div>
+                            <div class="tarot-front-tags"><span>大模型</span><span>Chatbot</span><span>Agent</span></div>
+                            <div class="tarot-enter" onclick="goToPage('project-assistant'); event.stopPropagation();">查看详细脉络 →</div>
+                        </div>
                     </div>
                     <div class="tarot-card-label">AI助手</div>
                 </div>
-                <div class="tarot-card" onclick="goToPage('project-game')">
-                    <div class="tarot-card-back">
-                        <svg class="tarot-back-pattern" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="tbg3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#FFF3E0"/><stop offset="100%" style="stop-color:#FFE0B2"/></linearGradient>
-                                <linearGradient id="tstar3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#FF9E8D"/><stop offset="100%" style="stop-color:#D4AF37"/></linearGradient>
-                            </defs>
-                            <rect width="100" height="160" rx="8" fill="url(#tbg3)" stroke="rgba(255,158,141,0.3)" stroke-width="1"/>
-                            <path d="M50 25 L55 40 L70 40 L58 50 L63 65 L50 55 L37 65 L42 50 L30 40 L45 40 Z" fill="url(#tstar3)" opacity="0.7"/>
-                            <circle cx="50" cy="90" r="12" fill="none" stroke="url(#tstar3)" stroke-width="1.5" opacity="0.5"/>
-                            <circle cx="30" cy="110" r="3" fill="url(#tstar3)" opacity="0.4"/>
-                            <circle cx="70" cy="110" r="3" fill="url(#tstar3)" opacity="0.4"/>
-                            <path d="M50 130 L50 145" stroke="url(#tstar3)" stroke-width="2" opacity="0.4"/>
-                        </svg>
+                <div class="tarot-slot" style="--sx:97px; --fx:3deg; --sr:1.5deg;" onclick="flipTarot(this, event)">
+                    <div class="tarot-card">
+                        <div class="tarot-card-back">
+                            <svg class="tarot-back-pattern" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="tbg3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#FFF3E0"/><stop offset="100%" style="stop-color:#FFE0B2"/></linearGradient>
+                                    <linearGradient id="tstar3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#FF9E8D"/><stop offset="100%" style="stop-color:#D4AF37"/></linearGradient>
+                                </defs>
+                                <rect width="100" height="160" rx="8" fill="url(#tbg3)" stroke="rgba(255,158,141,0.3)" stroke-width="1"/>
+                                <path d="M50 25 L55 40 L70 40 L58 50 L63 65 L50 55 L37 65 L42 50 L30 40 L45 40 Z" fill="url(#tstar3)" opacity="0.7"/>
+                                <circle cx="50" cy="90" r="12" fill="none" stroke="url(#tstar3)" stroke-width="1.5" opacity="0.5"/>
+                                <circle cx="30" cy="110" r="3" fill="url(#tstar3)" opacity="0.4"/>
+                                <circle cx="70" cy="110" r="3" fill="url(#tstar3)" opacity="0.4"/>
+                                <path d="M50 130 L50 145" stroke="url(#tstar3)" stroke-width="2" opacity="0.4"/>
+                            </svg>
+                        </div>
+                        <div class="tarot-card-front">
+                            <div class="tarot-front-icon">🎲</div>
+                            <div class="tarot-name">趣味游戏</div>
+                            <div class="tarot-slogan">把 AI 玩出温度</div>
+                            <div class="tarot-detail">灵喵记账、天机可以泄露、今天吃什么：三个从生活痛点长出来的小产品，低门槛、高趣味，也有商业想象。</div>
+                            <div class="tarot-front-tags"><span>AI记账</span><span>占卜</span><span>抽签</span></div>
+                            <div class="tarot-enter" onclick="goToPage('project-game'); event.stopPropagation();">查看详细脉络 →</div>
+                        </div>
                     </div>
                     <div class="tarot-card-label">趣味游戏</div>
                 </div>
-                <div class="tarot-card" onclick="goToPage('project-todo')">
-                    <div class="tarot-card-back">
-                        <svg class="tarot-back-pattern" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="tbg4" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#E8F5E9"/><stop offset="100%" style="stop-color:#C8E6C9"/></linearGradient>
-                                <linearGradient id="tstar4" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#7EC8A8"/><stop offset="100%" style="stop-color:#2C5F7C"/></linearGradient>
-                            </defs>
-                            <rect width="100" height="160" rx="8" fill="url(#tbg4)" stroke="rgba(126,200,168,0.3)" stroke-width="1"/>
-                            <circle cx="50" cy="40" r="20" fill="none" stroke="url(#tstar4)" stroke-width="1.5" opacity="0.5"/>
-                            <path d="M50 25 L50 55 M35 40 L65 40" stroke="url(#tstar4)" stroke-width="2" opacity="0.6"/>
-                            <circle cx="50" cy="85" r="5" fill="url(#tstar4)" opacity="0.5"/>
-                            <circle cx="30" cy="105" r="3" fill="url(#tstar4)" opacity="0.4"/>
-                            <circle cx="70" cy="105" r="3" fill="url(#tstar4)" opacity="0.4"/>
-                            <circle cx="50" cy="125" r="4" fill="url(#tstar4)" opacity="0.5"/>
-                            <path d="M50 138 L50 150" stroke="url(#tstar4)" stroke-width="2" opacity="0.4"/>
-                        </svg>
+                <div class="tarot-slot" style="--sx:292px; --fx:8deg; --sr:4deg;" onclick="flipTarot(this, event)">
+                    <div class="tarot-card">
+                        <div class="tarot-card-back">
+                            <svg class="tarot-back-pattern" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="tbg4" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#E8F5E9"/><stop offset="100%" style="stop-color:#C8E6C9"/></linearGradient>
+                                    <linearGradient id="tstar4" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#7EC8A8"/><stop offset="100%" style="stop-color:#2C5F7C"/></linearGradient>
+                                </defs>
+                                <rect width="100" height="160" rx="8" fill="url(#tbg4)" stroke="rgba(126,200,168,0.3)" stroke-width="1"/>
+                                <circle cx="50" cy="40" r="20" fill="none" stroke="url(#tstar4)" stroke-width="1.5" opacity="0.5"/>
+                                <path d="M50 25 L50 55 M35 40 L65 40" stroke="url(#tstar4)" stroke-width="2" opacity="0.6"/>
+                                <circle cx="50" cy="85" r="5" fill="url(#tstar4)" opacity="0.5"/>
+                                <circle cx="30" cy="105" r="3" fill="url(#tstar4)" opacity="0.4"/>
+                                <circle cx="70" cy="105" r="3" fill="url(#tstar4)" opacity="0.4"/>
+                                <circle cx="50" cy="125" r="4" fill="url(#tstar4)" opacity="0.5"/>
+                                <path d="M50 138 L50 150" stroke="url(#tstar4)" stroke-width="2" opacity="0.4"/>
+                            </svg>
+                        </div>
+                        <div class="tarot-card-front">
+                            <div class="tarot-front-icon">✨</div>
+                            <div class="tarot-name">未完待续</div>
+                            <div class="tarot-slogan">下一个灵感正在孵化</div>
+                            <div class="tarot-detail">从 AI 金融到生活趣味，每一个想法都值得被实现。如果你有有趣的点子，欢迎一起共创。</div>
+                            <div class="tarot-front-tags"><span>孵化中</span><span>共创</span></div>
+                            <div class="tarot-enter" onclick="goToPage('project-todo'); event.stopPropagation();">查看详细脉络 →</div>
+                        </div>
                     </div>
                     <div class="tarot-card-label">未完待续</div>
                 </div>
@@ -929,8 +1033,7 @@
     <!-- ========== 项目详情：提效工作流 ========== -->
     <section class="page-section" id="project-workflow">
         <div class="project-detail-container">
-            <div class="project-detail-back" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> 返回灵犀华章</div>
-            <div class="project-page-title">提效工作流</div>
+            <div class="project-page-title" style="margin-top: 8px;">提效工作流</div>
             <div class="project-list">
                 <div class="project-item">
                     <div class="project-item-left">
@@ -971,8 +1074,7 @@
     <!-- ========== 项目详情：AI助手 ========== -->
     <section class="page-section" id="project-assistant">
         <div class="project-detail-container">
-            <div class="project-detail-back" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> 返回灵犀华章</div>
-            <div class="project-page-title">AI助手</div>
+            <div class="project-page-title" style="margin-top: 8px;">AI助手</div>
             <div class="project-list">
                 <div class="project-item">
                     <div class="project-item-left">
@@ -1029,8 +1131,7 @@
     <!-- ========== 项目详情：趣味游戏 ========== -->
     <section class="page-section" id="project-game">
         <div class="project-detail-container">
-            <div class="project-detail-back" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> 返回灵犀华章</div>
-            <div class="project-page-title">趣味游戏</div>
+            <div class="project-page-title" style="margin-top: 8px;">趣味游戏</div>
             <div class="project-list">
                 <div class="project-item">
                     <div class="project-item-left">
@@ -1087,8 +1188,7 @@
     <!-- ========== 项目详情：未完待续 ========== -->
     <section class="page-section" id="project-todo">
         <div class="project-detail-container">
-            <div class="project-detail-back" onclick="goBack()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> 返回灵犀华章</div>
-            <div class="project-page-title">未完待续</div>
+            <div class="project-page-title" style="margin-top: 8px;">未完待续</div>
             <div class="project-todo-content">
                 <div class="project-todo-card">
                     <div class="project-todo-icon">✨</div>
@@ -1149,9 +1249,9 @@
                     </div>
                     <div class="magazine-block-content">
                         <div class="year-stack" id="year-stack" onclick="nextYearCard()">
-                            <div class="year-card" data-ypos="2" data-yidx="2"><img src="2024-memories.png" alt="2024回忆录"><div class="year-card-label">2024 · 回忆录</div></div>
-                            <div class="year-card" data-ypos="1" data-yidx="1"><img src="2025-summary.png" alt="2025年度总结"><div class="year-card-label">2025 · 年度总结</div></div>
-                            <div class="year-card" data-ypos="0" data-yidx="0"><img src="2025-travel.png" alt="2025年度旅行"><div class="year-card-label">2025 · 足迹</div></div>
+                            <div class="year-card" data-ypos="2" data-yidx="2"><img src="2024-memories-web.jpg" alt="2024回忆录" loading="lazy" decoding="async"><div class="year-card-label">2024 · 回忆录</div></div>
+                            <div class="year-card" data-ypos="1" data-yidx="1"><img src="2025-summary-web.jpg" alt="2025年度总结" loading="lazy" decoding="async"><div class="year-card-label">2025 · 年度总结</div></div>
+                            <div class="year-card" data-ypos="0" data-yidx="0"><img src="2025-travel-web.jpg" alt="2025年度旅行" loading="lazy" decoding="async"><div class="year-card-label">2025 · 足迹</div></div>
                         </div>
                         <div class="year-dots" id="year-dots">
                             <div class="year-d" data-yd="0" onclick="setYearCard(0); event.stopPropagation();"></div>
@@ -1168,8 +1268,10 @@
                         <div class="magazine-block-desc">产品分析、行业观察</div>
                     </div>
                     <div class="magazine-block-content">
-                        <div class="magazine-item"><div class="magazine-item-dot"></div><div class="magazine-item-text">AI金融产品的交互设计趋势</div></div>
-                        <div class="magazine-placeholder" style="margin-top:8px;">更多文章筹备中...</div>
+                        <div class="magazine-item"><div class="magazine-item-dot"></div><a class="magazine-link" href="https://mp.weixin.qq.com/s/kZ4_d6xqyzgrM699d4rIvw" target="_blank" rel="noopener">AI 用得好不好，跟你会不会管人，越来越是同一件事<span class="magazine-src">数字生命卡兹克 · 2026.07</span></a></div>
+                        <div class="magazine-item"><div class="magazine-item-dot"></div><a class="magazine-link" href="https://mp.weixin.qq.com/s/08Z-Jk4nccaBAbh65aqtKA" target="_blank" rel="noopener">盘点 16 个把自己蒸馏成 Skills 的国民级 App<span class="magazine-src">数字生命卡兹克 · 2026.06</span></a></div>
+                        <div class="magazine-item"><div class="magazine-item-dot"></div><a class="magazine-link" href="https://mp.weixin.qq.com/s/kbewg3kIsfcBN-jUIfzkpg" target="_blank" rel="noopener">OpenClaw 保姆级教程：安装 + 接入飞书/QQ<span class="magazine-src">程序员鱼皮 · 2026.03</span></a></div>
+                        <div class="magazine-item"><div class="magazine-item-dot"></div><a class="magazine-link" href="https://www.cnblogs.com/yupi" target="_blank" rel="noopener">鱼皮的最新随笔（日更入口）<span class="magazine-src">程序员鱼皮 · 博客园</span></a></div>
                     </div>
                 </div>
                 <div class="magazine-block">
@@ -1179,10 +1281,25 @@
                         <div class="magazine-block-desc">AI工具探索、提示词心得</div>
                     </div>
                     <div class="magazine-block-content">
-                        <div class="magazine-item"><div class="magazine-item-dot"></div><div class="magazine-item-text">保险界世界模型会是怎样的？</div></div>
-                        <div class="magazine-item"><div class="magazine-item-dot"></div><div class="magazine-item-text">Loop 和 Skill 的区别是什么？</div></div>
-                        <div class="magazine-item"><div class="magazine-item-dot"></div><div class="magazine-item-text">原生AI最终会取代传统 App 吗？</div></div>
-                        <div class="magazine-item"><div class="magazine-item-dot"></div><div class="magazine-item-text">端智能是否会成为下一风口？</div></div>
+                        <!-- MUSE:START -->
+                        <div class="muse-item">
+                            <div class="muse-q">保险界世界模型会是怎样的？</div>
+                            <div class="muse-a">如果巨灾与长寿风险都能在模拟世界里预演一万次，定价会不会从"统计"变成"预言"？</div>
+                        </div>
+                        <div class="muse-item">
+                            <div class="muse-q">Loop 和 Skill 的区别是什么？</div>
+                            <div class="muse-a">一个让 Agent 不知疲倦地跑，一个让它身怀绝技——核保岗的 AI 同事，更需要哪一个？</div>
+                        </div>
+                        <div class="muse-item">
+                            <div class="muse-q">当 AI 代理人也要"持证上岗"，该考什么？</div>
+                            <div class="muse-a">金融 AI 监管细则落地后，合规会不会变成 Agent 必须内置的第一个 Skill？</div>
+                        </div>
+                        <div class="muse-item">
+                            <div class="muse-q">具身智能开始买保险了，险企在为"硅基生命"定价？</div>
+                            <div class="muse-a">机器人投保与首单理赔已经落地，财险的承保对象正在溢出人类世界。</div>
+                        </div>
+                        <!-- MUSE:END -->
+                        <div class="magazine-updated">✦ 话题每日更新</div>
                     </div>
                 </div>
                 <div class="magazine-block">
@@ -1192,9 +1309,13 @@
                         <div class="magazine-block-desc">每周AI/金融热点简评</div>
                     </div>
                     <div class="magazine-block-content">
-                        <div class="magazine-item"><div class="magazine-item-dot"></div><div class="magazine-item-text">AI Agent 爆发元年观察</div></div>
-                        <div class="magazine-item"><div class="magazine-item-dot"></div><div class="magazine-item-text">金融大模型监管趋势</div></div>
-                        <div class="magazine-item"><div class="magazine-item-dot"></div><div class="magazine-item-text">支付宝转向原生AI设计</div></div>
+                        <!-- HOTSPOTS:START -->
+                        <div class="magazine-item"><div class="magazine-item-dot"></div><div class="magazine-item-text">金融监管总局落地银行业保险业首份 AI 安全开发应用指导意见，32 项细则拧紧金融 AI"安全阀"</div></div>
+                        <div class="magazine-item"><div class="magazine-item-dot"></div><div class="magazine-item-text">云栖大会金融峰会：平安车险智能出单 1.2 亿单、80% 业务 AI 端到端完成，单均耗时 5.7 分钟 → 1.2 分钟</div></div>
+                        <div class="magazine-item"><div class="magazine-item-dot"></div><div class="magazine-item-text">五大上市险企 AI 战略落地：国寿智能核保审核率 95.8%，人保 AI 定损准确率突破 95%</div></div>
+                        <div class="magazine-item"><div class="magazine-item-dot"></div><div class="magazine-item-text">WAIC 2026：华泰证券"智启新金融"论坛——AI 正从效率工具演变为金融基础设施</div></div>
+                        <!-- HOTSPOTS:END -->
+                        <div class="magazine-updated">✦ 热点每日更新</div>
                     </div>
                 </div>
             </div>
@@ -1365,6 +1486,63 @@
             }
         }
 
+        // ===== 年度总结卡片堆叠 =====
+        let currentYearIdx = 0; let isYearAnimating = false;
+        function updateYearStack() {
+            const cards = document.querySelectorAll('.year-card'); const dots = document.querySelectorAll('.year-d');
+            cards.forEach((card, i) => { const pos = (i + 3 - currentYearIdx) % 3; card.setAttribute('data-ypos', pos); });
+            dots.forEach((dot, i) => { dot.classList.toggle('active', i === currentYearIdx); });
+        }
+        function nextYearCard() {
+            if (isYearAnimating) return; isYearAnimating = true;
+            const cards = document.querySelectorAll('.year-card'); const frontCard = cards[0];
+            frontCard.classList.add('flying-out');
+            setTimeout(() => {
+                frontCard.classList.remove('flying-out'); frontCard.classList.add('to-back');
+                const stack = document.getElementById('year-stack'); stack.appendChild(frontCard);
+                currentYearIdx = (currentYearIdx + 1) % 3; updateYearStack();
+                setTimeout(() => { frontCard.classList.remove('to-back'); isYearAnimating = false; }, 50);
+            }, 500);
+        }
+        function setYearCard(index) {
+            if (isYearAnimating || index === currentYearIdx) return; isYearAnimating = true;
+            const cards = Array.from(document.querySelectorAll('.year-card')); const diff = (index - currentYearIdx + 3) % 3;
+            let processed = 0;
+            for (let i = 0; i < diff; i++) {
+                setTimeout(() => {
+                    const frontCard = cards[i]; frontCard.classList.add('flying-out');
+                    setTimeout(() => {
+                        frontCard.classList.remove('flying-out'); frontCard.classList.add('to-back');
+                        const stack = document.getElementById('year-stack'); stack.appendChild(frontCard);
+                        currentYearIdx = (currentYearIdx + 1) % 3; updateYearStack();
+                        setTimeout(() => { frontCard.classList.remove('to-back'); processed++; if (processed === diff) isYearAnimating = false; }, 50);
+                    }, 500);
+                }, i * 600);
+            }
+        }
+
+        // ===== 灵犀华章 - 抽卡交互 =====
+        (function () {
+            const deck = document.getElementById('tarot-deck');
+            if (!deck) return;
+            deck.addEventListener('mouseenter', () => deck.classList.add('spread'));
+            // 进入页面 1.2s 后自动展开一次，给出"抽卡"提示
+            setTimeout(() => deck.classList.add('spread'), 1200);
+        })();
+        function flipTarot(slot, event) {
+            if (event.target.closest('.tarot-enter')) return;
+            const deck = document.getElementById('tarot-deck');
+            deck.classList.add('spread');
+            slot.querySelector('.tarot-card').classList.toggle('flipped');
+        }
+        function resetTarotFlips() {
+            document.querySelectorAll('#page-lingxi .tarot-card.flipped').forEach(c => c.classList.remove('flipped'));
+        }
+        // AI随想：移动端触摸展开
+        document.querySelectorAll('.muse-item').forEach(el => {
+            el.addEventListener('touchstart', () => el.classList.toggle('touched'), { passive: true });
+        });
+
         // ===== 页面导航系统 =====
         let currentPage = 'cover'; const pageHistory = ['cover'];
         function enterHome() {
@@ -1379,6 +1557,7 @@
             const nextSection = document.getElementById(pageId); if (!nextSection) return;
             if (currentSection) { currentSection.classList.remove('active'); }
             nextSection.classList.add('active'); currentPage = pageId; pageHistory.push(pageId);
+            if (pageId !== 'page-lingxi') { setTimeout(resetTarotFlips, 600); } else { resetTarotFlips(); }
             const backBtn = document.getElementById('back-btn'); backBtn.classList.add('visible');
             // 履迹流光滚动动画
             if (pageId === 'page-jili') {
@@ -1397,6 +1576,7 @@
                 const allSections = document.querySelectorAll('.page-section'); allSections.forEach(s => s.classList.remove('active'));
                 const prevSection = document.getElementById(prevPage); if (prevSection) { prevSection.classList.add('active'); }
                 currentPage = prevPage;
+                if (prevPage !== 'page-lingxi') { setTimeout(resetTarotFlips, 600); }
                 if (pageHistory.length === 1) { backBtn.classList.remove('visible'); }
                 if (prevPage === 'page-jili') { setTimeout(() => { document.querySelectorAll('.timeline-item').forEach((item, i) => { setTimeout(() => item.classList.add('visible'), i * 300); }); }, 400); }
             }
@@ -1409,6 +1589,116 @@
             link.click();
             document.body.removeChild(link);
         }
+
+        // ===== 全局鼠标粒子拖尾 =====
+        (function () {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const pc = document.createElement('canvas');
+            pc.id = 'particle-canvas';
+            document.body.appendChild(pc);
+            const pctx = pc.getContext('2d');
+            let pw, ph;
+            function pResize() { pw = pc.width = window.innerWidth; ph = pc.height = window.innerHeight; }
+            pResize(); window.addEventListener('resize', pResize);
+
+            const palette = [
+                [212, 175, 55],   // 金
+                [126, 200, 168],  // 薄荷绿
+                [135, 206, 235],  // 天蓝
+                [244, 208, 63]    // 亮金
+            ];
+            const particles = [];
+            let lastP = { x: -100, y: -100 };
+
+            function spawn(x, y, burst = false) {
+                const n = burst ? 8 : 2;
+                for (let i = 0; i < n; i++) {
+                    const c = palette[Math.floor(Math.random() * palette.length)];
+                    const a = Math.random() * Math.PI * 2;
+                    const sp = burst ? 0.6 + Math.random() * 2.2 : 0.15 + Math.random() * 0.5;
+                    particles.push({
+                        x, y,
+                        vx: Math.cos(a) * sp,
+                        vy: Math.sin(a) * sp - 0.25,
+                        size: burst ? 1.8 + Math.random() * 2.6 : 1.2 + Math.random() * 2.2,
+                        life: 1,
+                        decay: burst ? 0.016 + Math.random() * 0.014 : 0.02 + Math.random() * 0.018,
+                        color: c
+                    });
+                }
+                if (particles.length > 160) particles.splice(0, particles.length - 160);
+            }
+
+            function onMove(x, y) {
+                const dx = x - lastP.x, dy = y - lastP.y;
+                if (dx * dx + dy * dy > 300) { spawn(x, y); lastP = { x, y }; }
+            }
+            document.addEventListener('mousemove', e => onMove(e.clientX, e.clientY));
+            document.addEventListener('touchmove', e => { const t = e.touches[0]; onMove(t.clientX, t.clientY); }, { passive: true });
+            document.addEventListener('click', e => {
+                if (e.target.closest('.contact-overlay')) return;
+                spawn(e.clientX, e.clientY, true);
+            });
+
+            function pAnimate() {
+                pctx.clearRect(0, 0, pw, ph);
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i];
+                    p.x += p.vx; p.y += p.vy; p.vy += 0.012; p.life -= p.decay;
+                    if (p.life <= 0) { particles.splice(i, 1); continue; }
+                    const alpha = p.life * 0.75;
+                    const [r, g, b] = p.color;
+                    // 光晕 + 核心，两层圆代替昂贵的 shadowBlur
+                    pctx.beginPath();
+                    pctx.arc(p.x, p.y, p.size * 2.6, 0, Math.PI * 2);
+                    pctx.fillStyle = `rgba(${r},${g},${b},${alpha * 0.18})`;
+                    pctx.fill();
+                    pctx.beginPath();
+                    pctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    pctx.fillStyle = `rgba(${r},${g},${b},${alpha})`;
+                    pctx.fill();
+                }
+                requestAnimationFrame(pAnimate);
+            }
+            pAnimate();
+        })();
+
+        // ===== 卡片高光跟随 =====
+        document.querySelectorAll('.nav-card, .bio-card, .timeline-card, .trophy-card, .magazine-block, .project-item, .contact-card, .project-todo-card').forEach(el => {
+            el.classList.add('shine');
+            el.addEventListener('mousemove', e => {
+                const r = el.getBoundingClientRect();
+                el.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+                el.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+            });
+        });
+
+        // ===== 卡片 3D 倾斜 =====
+        function attachTilt(el, max = 5) {
+            el.classList.add('tilt');
+            el.addEventListener('mousemove', e => {
+                const r = el.getBoundingClientRect();
+                const px = (e.clientX - r.left) / r.width - 0.5;
+                const py = (e.clientY - r.top) / r.height - 0.5;
+                el.style.transform = `perspective(900px) rotateX(${(-py * max).toFixed(2)}deg) rotateY(${(px * max).toFixed(2)}deg) translateY(-3px)`;
+            });
+            el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+        }
+        if (window.matchMedia('(hover: hover)').matches) {
+            document.querySelectorAll('.bio-card, .timeline-card').forEach(el => attachTilt(el, 4));
+        }
+
+        // ===== 首页视差 =====
+        (function () {
+            const homeEl = document.getElementById('home');
+            const container = homeEl.querySelector('.home-container');
+            homeEl.addEventListener('mousemove', e => {
+                const px = e.clientX / window.innerWidth - 0.5;
+                const py = e.clientY / window.innerHeight - 0.5;
+                container.style.transform = `translate3d(${(-px * 10).toFixed(1)}px, ${(-py * 8).toFixed(1)}px, 0)`;
+            });
+            homeEl.addEventListener('mouseleave', () => { container.style.transform = ''; });
+        })();
     </script>
 </body>
 </html>
