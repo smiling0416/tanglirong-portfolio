@@ -339,7 +339,7 @@
         .tarot-placeholder { font-size: 0.7rem; color: #bbb; font-style: italic; margin-top: 8px; }
         #project-fubao, #project-jingdong, #project-dify, #project-zhongan { background: linear-gradient(180deg, rgba(243,229,245,0.88) 0%, rgba(250,245,255,0.88) 100%), url('home-bg.jpg') center center / cover no-repeat; }
         /* ===== 项目详情页 ===== */
-        #project-workflow, #project-assistant, #project-game, #project-todo { background: linear-gradient(180deg, rgba(243,229,245,0.88) 0%, rgba(250,245,255,0.88) 100%), url('home-bg.jpg') center center / cover no-repeat; }
+        #project-workflow, #project-assistant, #project-game, #project-todo, #project-kangyang { background: linear-gradient(180deg, rgba(243,229,245,0.88) 0%, rgba(250,245,255,0.88) 100%), url('home-bg.jpg') center center / cover no-repeat; }
         .project-detail-container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 60px 50px 60px; position: relative; z-index: 1; }
         .project-page-title { font-family: 'Pacifico', cursive; font-size: 2.5rem; color: var(--deep-blue); text-align: center; margin-bottom: 40px; letter-spacing: 0.05em; }
         .project-list { display: flex; flex-direction: column; gap: 32px; }
@@ -787,6 +787,50 @@
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-left">
+                        <div class="timeline-date">2026.08 - 至今</div>
+                        <div class="timeline-company">中国太平洋保险集团</div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="timeline-header">
+                            <div class="timeline-dept">集团总部 数据管理与人工智能部 · 上海</div>
+                            <div class="timeline-role">管培实习生</div>
+                        </div>
+                        <div class="timeline-projects">
+                            <div class="timeline-project">
+                                <div class="project-title">📑 战略对标调研</div>
+                                <div class="project-desc">参与<strong>太保AI应用白皮书</strong>、外部对标内参的撰写和整理，系统调研头部险企与科技公司的 AI 落地路径，辅助导师输出<strong>集团AI战略报告</strong>。</div>
+                                <span class="project-metric">集团级战略输出</span>
+                                <div class="project-tags">
+                                    <span class="project-tag">战略研究</span>
+                                    <span class="project-tag">行业对标</span>
+                                    <span class="project-tag">报告撰写</span>
+                                </div>
+                            </div>
+                            <div class="timeline-project">
+                                <div class="project-title">🏥 AI孵化项目落地</div>
+                                <div class="project-desc">参与<strong>多学科养老照护管家</strong>项目落地，协助 <span class="key-num">3</span> 场一线访谈，抽象"<strong>评估—方案—执行—异常—复评—家属沟通</strong>"六大场景业务闭环，完成冷启动验证；设计系统 Demo（<strong>AI工作台＋照护员移动端原型</strong>），目前正在推动项目落地。</div>
+                                <span class="project-metric">六场景闭环 · 冷启动验证</span>
+                                <div class="project-tags">
+                                    <span class="project-tag">养老AI</span>
+                                    <span class="project-tag">业务闭环抽象</span>
+                                    <span class="project-tag">原型设计</span>
+                                </div>
+                            </div>
+                            <div class="timeline-project">
+                                <div class="project-title">⚙️ 管理流程自动化</div>
+                                <div class="project-desc">实现各子集团 <strong>AI 项目上报管理流程 AI 自动化</strong>，构建建设需求和平台 Demo，协助太科团队实施上线；目前正在梳理公司流程阶段，预计 <span class="key-num">11月前</span>完成项目。</div>
+                                <span class="project-metric">流程AI化 · 预计11月上线</span>
+                                <div class="project-tags">
+                                    <span class="project-tag">流程自动化</span>
+                                    <span class="project-tag">需求构建</span>
+                                    <span class="project-tag">跨团队协同</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-left">
                         <div class="timeline-date">2026.01 - 2026.06</div>
                         <div class="timeline-company">京东科技</div>
                     </div>
@@ -928,7 +972,7 @@
             <p class="tarot-subtitle">Pick a card, explore the project</p>
             <p class="tarot-hint" id="tarot-hint">滑过牌堆，卡牌展开 · 点击翻面，遇见灵感</p>
             <div class="tarot-deck" id="tarot-deck">
-                <div class="tarot-slot" style="--sx:-292px; --fx:-8deg; --sr:-4deg;" onclick="flipTarot(this, event)">
+                <div class="tarot-slot" style="--sx:-380px; --fx:-10deg; --sr:-5deg;" onclick="flipTarot(this, event)">
                     <div class="tarot-card">
                         <div class="tarot-card-back">
                             <svg class="tarot-back-pattern" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
@@ -957,7 +1001,7 @@
                     </div>
                     <div class="tarot-card-label">提效工作流</div>
                 </div>
-                <div class="tarot-slot" style="--sx:-97px; --fx:-3deg; --sr:-1.5deg;" onclick="flipTarot(this, event)">
+                <div class="tarot-slot" style="--sx:-190px; --fx:-5deg; --sr:-2.5deg;" onclick="flipTarot(this, event)">
                     <div class="tarot-card">
                         <div class="tarot-card-back">
                             <svg class="tarot-back-pattern" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
@@ -985,7 +1029,35 @@
                     </div>
                     <div class="tarot-card-label">AI助手</div>
                 </div>
-                <div class="tarot-slot" style="--sx:97px; --fx:3deg; --sr:1.5deg;" onclick="flipTarot(this, event)">
+                <div class="tarot-slot" style="--sx:0px; --fx:0deg; --sr:0deg;" onclick="flipTarot(this, event)">
+                    <div class="tarot-card">
+                        <div class="tarot-card-back">
+                            <svg class="tarot-back-pattern" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="tbg5" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#FCE4EC"/><stop offset="100%" style="stop-color:#F8BBD0"/></linearGradient>
+                                    <linearGradient id="tstar5" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#E91E63"/><stop offset="100%" style="stop-color:#D4AF37"/></linearGradient>
+                                </defs>
+                                <rect width="100" height="160" rx="8" fill="url(#tbg5)" stroke="rgba(233,30,99,0.25)" stroke-width="1"/>
+                                <path d="M50 45 C42 35 28 40 28 52 C28 62 40 68 50 78 C60 68 72 62 72 52 C72 40 58 35 50 45" fill="none" stroke="url(#tstar5)" stroke-width="1.5" opacity="0.65"/>
+                                <path d="M38 55 L46 55 L49 48 L52 62 L55 55 L62 55" fill="none" stroke="url(#tstar5)" stroke-width="1.5" opacity="0.7"/>
+                                <circle cx="30" cy="95" r="3" fill="url(#tstar5)" opacity="0.45"/>
+                                <circle cx="70" cy="95" r="3" fill="url(#tstar5)" opacity="0.45"/>
+                                <circle cx="50" cy="118" r="5" fill="url(#tstar5)" opacity="0.5"/>
+                                <path d="M50 132 L50 146" stroke="url(#tstar5)" stroke-width="2" opacity="0.45"/>
+                            </svg>
+                        </div>
+                        <div class="tarot-card-front">
+                            <div class="tarot-front-icon">🏥</div>
+                            <div class="tarot-name">智能康养</div>
+                            <div class="tarot-slogan">医养结合的 AI 照护闭环</div>
+                            <div class="tarot-detail">多学科养老照护管家：AI 工作台（PC端）× 照护师移动端，跑通"评估—方案—执行—异常—复评—家属沟通"六大场景业务闭环。</div>
+                            <div class="tarot-front-tags"><span>养老AI</span><span>多智能体</span><span>产品落地</span></div>
+                            <div class="tarot-enter" onclick="goToPage('project-kangyang'); event.stopPropagation();">查看详细脉络 →</div>
+                        </div>
+                    </div>
+                    <div class="tarot-card-label">智能康养</div>
+                </div>
+                <div class="tarot-slot" style="--sx:190px; --fx:5deg; --sr:2.5deg;" onclick="flipTarot(this, event)">
                     <div class="tarot-card">
                         <div class="tarot-card-back">
                             <svg class="tarot-back-pattern" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
@@ -1012,7 +1084,7 @@
                     </div>
                     <div class="tarot-card-label">趣味游戏</div>
                 </div>
-                <div class="tarot-slot" style="--sx:292px; --fx:8deg; --sr:4deg;" onclick="flipTarot(this, event)">
+                <div class="tarot-slot" style="--sx:380px; --fx:10deg; --sr:5deg;" onclick="flipTarot(this, event)">
                     <div class="tarot-card">
                         <div class="tarot-card-back">
                             <svg class="tarot-back-pattern" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
@@ -1220,6 +1292,63 @@
         </div>
     </section>
 
+    <!-- ========== 项目详情：智能康养 ========== -->
+    <section class="page-section" id="project-kangyang">
+        <div class="project-detail-container">
+            <div class="project-page-title" style="margin-top: 8px;">智能康养照护工作台</div>
+            <div class="project-list">
+                <div class="project-item">
+                    <div class="project-item-left">
+                        <div class="project-number">PROJECT #1</div>
+                        <div class="project-name">AI 工作台（PC端）</div>
+                        <div class="project-item-tags"><span class="project-item-tag">专家端</span><span class="project-item-tag">方案编排</span><span class="project-item-tag">冲突检测</span></div>
+                        <div class="project-item-desc">面向多学科照护专家的工作台，覆盖 <strong>M1 方案编辑 / M2 任务拆解 / M4 数据看板</strong> 三大模块：将 <span class="key-num">39</span> 条照护方案自动拆解为 <span class="key-num">87</span> 条/日执行任务，跨专业方案<strong>冲突自动标红</strong>，让医生、康复师、营养师在同一张图上协同。</div>
+                        <div class="project-item-highlights">
+                            <div class="p-highlight">🗂️ 39 条方案 → 87 条/日任务自动拆解</div>
+                            <div class="p-highlight">🚦 跨专业冲突自动标红，协同零盲区</div>
+                            <div class="p-highlight">📊 M4 看板追踪执行完成度与风险</div>
+                        </div>
+                    </div>
+                    <div class="project-item-right">
+                        <div class="project-item-visual" style="background: linear-gradient(135deg, rgba(252,228,236,0.35), rgba(248,187,208,0.25)); display:flex; align-items:center; justify-content:center; font-size:3rem;">🖥️</div>
+                    </div>
+                </div>
+                <div class="project-item">
+                    <div class="project-item-left">
+                        <div class="project-number">PROJECT #2</div>
+                        <div class="project-name">照护师移动端</div>
+                        <div class="project-item-tags"><span class="project-item-tag">适老化设计</span><span class="project-item-tag">极简交互</span><span class="project-item-tag">异常上报</span></div>
+                        <div class="project-item-desc">为 <strong>40+ 岁、低文化水平</strong>的照护师群体（最大用户群 <span class="key-num">90+</span> 人）设计：<strong>勾选 + 语音</strong>两步内完成执行反馈，操作步长 ≤2 步；异常<strong>一键上报</strong>，超时未处理自动<strong>升级</strong>，把复杂留给系统，把简单留给一线。</div>
+                        <div class="project-item-highlights">
+                            <div class="p-highlight">✅ 勾选 + 语音 ≤2 步完成执行反馈</div>
+                            <div class="p-highlight">🚨 异常一键上报，超时自动升级</div>
+                            <div class="p-highlight">👥 面向 90+ 人照护师群体的适老化设计</div>
+                        </div>
+                    </div>
+                    <div class="project-item-right">
+                        <div class="project-item-visual" style="background: linear-gradient(135deg, rgba(252,228,236,0.35), rgba(248,187,208,0.25)); display:flex; align-items:center; justify-content:center; font-size:3rem;">📱</div>
+                    </div>
+                </div>
+                <div class="project-item">
+                    <div class="project-item-left">
+                        <div class="project-number">PROJECT #3</div>
+                        <div class="project-name">六场景闭环与冷启动验证</div>
+                        <div class="project-item-tags"><span class="project-item-tag">业务闭环</span><span class="project-item-tag">一线访谈</span><span class="project-item-tag">系统集成</span></div>
+                        <div class="project-item-desc">协助 <span class="key-num">3</span> 场一线访谈，以 82 岁髋置换术后老人的真实照护路径为样本，抽象"<strong>评估—方案—执行—异常—复评—家属沟通</strong>"六大场景业务闭环并完成冷启动验证；基于<strong>家园通底座 + 15 项接口</strong>集成，坚守硬约束：<strong>AI 仅为建议性质，设确认门，未经人工确认不得写入家园通</strong>。</div>
+                        <div class="project-item-highlights">
+                            <div class="p-highlight">🔄 六大场景业务闭环，冷启动验证完成</div>
+                            <div class="p-highlight">🔗 家园通底座 + 15 项接口集成</div>
+                            <div class="p-highlight">🛡️ AI 建议性质 + 人工确认门，安全可追责</div>
+                        </div>
+                    </div>
+                    <div class="project-item-right">
+                        <div class="project-item-visual" style="background: linear-gradient(135deg, rgba(252,228,236,0.35), rgba(248,187,208,0.25)); display:flex; align-items:center; justify-content:center; font-size:3rem;">🔄</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ========== 浮生拾光 - 杂志风 ========== -->
     <section class="page-section" id="page-fusheng">
         <div class="magazine-container">
@@ -1284,10 +1413,15 @@
                         <div class="magazine-block-desc">产品分析、行业观察</div>
                     </div>
                     <div class="magazine-block-content">
+                        <!-- ARTICLES:START -->
                         <div class="magazine-item"><div class="magazine-item-dot"></div><a class="magazine-link" href="https://mp.weixin.qq.com/s/kZ4_d6xqyzgrM699d4rIvw" target="_blank" rel="noopener">AI 用得好不好，跟你会不会管人，越来越是同一件事<span class="magazine-src">数字生命卡兹克 · 2026.07</span></a></div>
                         <div class="magazine-item"><div class="magazine-item-dot"></div><a class="magazine-link" href="https://mp.weixin.qq.com/s/08Z-Jk4nccaBAbh65aqtKA" target="_blank" rel="noopener">盘点 16 个把自己蒸馏成 Skills 的国民级 App<span class="magazine-src">数字生命卡兹克 · 2026.06</span></a></div>
                         <div class="magazine-item"><div class="magazine-item-dot"></div><a class="magazine-link" href="https://mp.weixin.qq.com/s/kbewg3kIsfcBN-jUIfzkpg" target="_blank" rel="noopener">OpenClaw 保姆级教程：安装 + 接入飞书/QQ<span class="magazine-src">程序员鱼皮 · 2026.03</span></a></div>
                         <div class="magazine-item"><div class="magazine-item-dot"></div><a class="magazine-link" href="https://www.cnblogs.com/yupi" target="_blank" rel="noopener">鱼皮的最新随笔（日更入口）<span class="magazine-src">程序员鱼皮 · 博客园</span></a></div>
+                        <div class="magazine-item"><div class="magazine-item-dot"></div><a class="magazine-link" href="https://www.qbitai.com" target="_blank" rel="noopener">量子位 · 追踪 AI 前沿的一手快讯与深度报道<span class="magazine-src">量子位 · 常读入口</span></a></div>
+                        <div class="magazine-item"><div class="magazine-item-dot"></div><a class="magazine-link" href="https://www.jiqizhixin.com" target="_blank" rel="noopener">机器之心 · 模型论文与产业落地的专业解读<span class="magazine-src">机器之心 · 常读入口</span></a></div>
+                        <!-- ARTICLES:END -->
+                        <div class="magazine-updated">✦ 文章每周更新</div>
                     </div>
                 </div>
                 <div class="magazine-block">
