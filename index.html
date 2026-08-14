@@ -395,6 +395,22 @@
         .muse-a { font-size: 0.75rem; color: #888; line-height: 1.6; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.45s ease, opacity 0.45s ease, margin-top 0.45s ease; margin-top: 0; }
         .muse-item:hover .muse-a, .muse-item.touched .muse-a { max-height: 80px; opacity: 1; margin-top: 4px; }
 
+        /* 热点追踪 - Tab 切换 + 悬停展开 */
+        .hs-tabs { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+        .hs-tab { font-size: 0.72rem; padding: 5px 12px; border-radius: 999px; border: 1px solid rgba(126,200,168,0.45); background: rgba(255,255,255,0.35); color: #888; cursor: pointer; transition: all 0.25s ease; letter-spacing: 0.04em; user-select: none; }
+        .hs-tab:hover { background: rgba(255,255,255,0.65); color: var(--deep-blue); }
+        .hs-tab.active { background: linear-gradient(120deg, var(--mint), var(--sky)); color: #fff; border-color: transparent; box-shadow: 0 2px 8px rgba(126,200,168,0.35); }
+        .hs-panel { display: none; }
+        .hs-panel.active { display: block; animation: hsFade 0.35s ease; }
+        @keyframes hsFade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+        .hs-item { padding: 9px 10px; border-radius: 10px; border-left: 3px solid rgba(126,200,168,0.5); background: rgba(255,255,255,0.35); margin-bottom: 8px; transition: background 0.3s ease; }
+        .hs-item:hover { background: rgba(255,255,255,0.7); }
+        .hs-title { font-size: 0.85rem; color: var(--deep-blue); font-weight: 600; line-height: 1.5; text-decoration: none; background: linear-gradient(90deg, var(--mint), var(--sky)) left bottom / 0% 1.5px no-repeat; padding-bottom: 2px; transition: color 0.25s ease, background-size 0.25s ease; }
+        .hs-title:hover { color: var(--text-green); background-size: 100% 1.5px; }
+        .hs-meta { font-size: 0.68rem; color: #aaa; margin-top: 3px; letter-spacing: 0.03em; }
+        .hs-sum { font-size: 0.75rem; color: #888; line-height: 1.6; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.45s ease, opacity 0.45s ease, margin-top 0.45s ease; margin-top: 0; }
+        .hs-item:hover .hs-sum, .hs-item.touched .hs-sum { max-height: 120px; opacity: 1; margin-top: 4px; }
+
         /* 年度总结 - 卡片堆叠 */
         .year-stack { width: 220px; height: 300px; position: relative; cursor: pointer; margin: 0 auto; }
         .year-card { position: absolute; width: 100%; height: 100%; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.15), 0 2px 8px rgba(0,0,0,0.08); border: 3px solid rgba(255,255,255,0.7); transition: all 0.6s cubic-bezier(0.4,0,0.2,1); transform-origin: center bottom; backface-visibility: hidden; }
@@ -1283,39 +1299,67 @@
                     <div class="magazine-block-content">
                         <!-- MUSE:START -->
                         <div class="muse-item">
-                            <div class="muse-q">保险界世界模型会是怎样的？</div>
-                            <div class="muse-a">如果巨灾与长寿风险都能在模拟世界里预演一万次，定价会不会从"统计"变成"预言"？</div>
+                            <div class="muse-q">银行日均 Token 调用两年增千倍，保险业的"词元通胀"该怎么定价？</div>
+                            <div class="muse-a">当算力消耗成为金融机构的新成本中心，保险精算模型是否该引入"Token 费率因子"来衡量 AI 运营的边际成本？</div>
                         </div>
                         <div class="muse-item">
-                            <div class="muse-q">Loop 和 Skill 的区别是什么？</div>
-                            <div class="muse-a">一个让 Agent 不知疲倦地跑，一个让它身怀绝技——核保岗的 AI 同事，更需要哪一个？</div>
+                            <div class="muse-q">欧盟 AI 法案要求金融客服"自曝身份"，透明度和转化效率能兼得吗？</div>
+                            <div class="muse-a">8月2日起欧盟强制智能客服标注 AI 身份，这与我国"谁使用谁负责"的监管思路形成对照——保险营销 Agent 的合规成本会转嫁到保费里吗？</div>
                         </div>
                         <div class="muse-item">
-                            <div class="muse-q">当 AI 代理人也要"持证上岗"，该考什么？</div>
-                            <div class="muse-a">金融 AI 监管细则落地后，合规会不会变成 Agent 必须内置的第一个 Skill？</div>
+                            <div class="muse-q">太保给机器人和无人机上保险，险企的承保对象正在溢出碳基世界？</div>
+                            <div class="muse-a">人形机器人、低空经济被纳入 AI 伴生风险保障，财险的精算基础从"生命表"走向"机器故障率表"，这对精算师是威胁还是新赛道？</div>
                         </div>
                         <div class="muse-item">
-                            <div class="muse-q">具身智能开始买保险了，险企在为"硅基生命"定价？</div>
-                            <div class="muse-a">机器人投保与首单理赔已经落地，财险的承保对象正在溢出人类世界。</div>
+                            <div class="muse-q">理赔 Agent 占比超 13% 成保险"龙虾"最热技能，核保 Agent 为什么还没追上？</div>
+                            <div class="muse-a">复旦研究团队发现理赔与合规技能合计占比超 24%——理赔规则标准化高、核保规则太灵活，这会不会让 AI 在保险价值链上出现"头重脚轻"的失衡？</div>
                         </div>
                         <!-- MUSE:END -->
-                        <div class="magazine-updated">✦ 话题每日更新</div>
+                        <div class="magazine-updated">✦ 话题每周更新</div>
                     </div>
                 </div>
                 <div class="magazine-block">
                     <div class="magazine-block-header">
                         <div class="magazine-block-icon">🔥</div>
                         <div class="magazine-block-title">热点追踪</div>
-                        <div class="magazine-block-desc">每周AI/金融热点简评</div>
+                        <div class="magazine-block-desc">AI前沿 · 金融科技 · 保险科技 · 大厂动态</div>
                     </div>
                     <div class="magazine-block-content">
-                        <!-- HOTSPOTS:START -->
-                        <div class="magazine-item"><div class="magazine-item-dot"></div><div class="magazine-item-text">金融监管总局落地银行业保险业首份 AI 安全开发应用指导意见，32 项细则拧紧金融 AI"安全阀"</div></div>
-                        <div class="magazine-item"><div class="magazine-item-dot"></div><div class="magazine-item-text">云栖大会金融峰会：平安车险智能出单 1.2 亿单、80% 业务 AI 端到端完成，单均耗时 5.7 分钟 → 1.2 分钟</div></div>
-                        <div class="magazine-item"><div class="magazine-item-dot"></div><div class="magazine-item-text">五大上市险企 AI 战略落地：国寿智能核保审核率 95.8%，人保 AI 定损准确率突破 95%</div></div>
-                        <div class="magazine-item"><div class="magazine-item-dot"></div><div class="magazine-item-text">WAIC 2026：华泰证券"智启新金融"论坛——AI 正从效率工具演变为金融基础设施</div></div>
-                        <!-- HOTSPOTS:END -->
-                        <div class="magazine-updated">✦ 热点每日更新</div>
+                        <div class="hs-tabs">
+                            <div class="hs-tab active" data-hs="ai" onclick="switchHsTab('ai')">AI前沿</div>
+                            <div class="hs-tab" data-hs="fin" onclick="switchHsTab('fin')">金融科技</div>
+                            <div class="hs-tab" data-hs="ins" onclick="switchHsTab('ins')">保险科技</div>
+                            <div class="hs-tab" data-hs="tech" onclick="switchHsTab('tech')">大厂动态</div>
+                        </div>
+                        <div class="hs-panel active" id="hs-panel-ai">
+                            <!-- HOTSPOTS-AI:START -->
+                            <div class="hs-item"><a class="hs-title" href="https://www.caixin.com/2026-08-11/102473126.html" target="_blank" rel="noopener">Meta 开源端侧小模型 Muse Glimmer，全程「蒸馏」训练</a><div class="hs-meta">财新 · 2026.08.11</div><div class="hs-sum">300 亿参数、单张消费级 GPU 即可运行，以闭源 Muse Spark 为老师模型蒸馏训练，支持本地智能体、函数调用与本地编程，表现接近 Gemma4-31B 与 Qwen3.6-27B。</div></div>
+                            <div class="hs-item"><a class="hs-title" href="https://m.sohu.com/a/1061601188_350699" target="_blank" rel="noopener">五款中国开源大模型两月内集中发布，多款登顶全球榜单</a><div class="hs-meta">搜狐科技 · 2026.08.11</div><div class="hs-sum">Qwen3.8-Max、Kimi K3、DeepSeek-V4-Flash、GLM-5.2 与 Seedance 2.5 相继亮相；Kimi K3 开源一小时登顶 Hugging Face 总趋势榜，7 月 OpenRouter 调用量前六名均为中国模型。</div></div>
+                            <div class="hs-item"><a class="hs-title" href="https://www.caixin.com/2026-08-12/102473442.html" target="_blank" rel="noopener">端侧模型企业面壁智能启动 IPO 辅导，估值超 200 亿元</a><div class="hs-meta">财新 · 2026.08.12</div><div class="hs-sum">已向北京证监局提交上市辅导备案，或成首家适用科创板第五套标准的大模型企业；主打端侧 MiniCPM 系列，2026 年以来已完成三轮融资。</div></div>
+                            <!-- HOTSPOTS-AI:END -->
+                        </div>
+                        <div class="hs-panel" id="hs-panel-fin">
+                            <!-- HOTSPOTS-FIN:START -->
+                            <div class="hs-item"><a class="hs-title" href="https://xueqiu.com/5187193467/404580674" target="_blank" rel="noopener">证券业扎堆布局 AI Skills，排名前十券商已有半数落地</a><div class="hs-meta">雪球 · 2026.08.11</div><div class="hs-sum">国泰海通「灵犀Skills」上线 AI 技能仓库并上架华为小艺，华泰落地「智研Skill&MCP」，中金把首席分析师方法论封装为专属 Skills，覆盖投研、财富管理、合规风控。</div></div>
+                            <div class="hs-item"><a class="hs-title" href="https://news.qq.com/rain/a/20260809A000O000" target="_blank" rel="noopener">宁波银行大模型「阿波」完成超 5000 人内测</a><div class="hs-meta">腾讯新闻·数字金融周报 · 2026.08.08</div><div class="hs-sum">「阿波」定位面向员工与客户的 AI 金融智能助手，覆盖办公赋能、营销赋能、知识投教与账户管理；该行 2025 年 9 月以来已发布十余个智能体项目供应商召集公告。</div></div>
+                            <div class="hs-item"><a class="hs-title" href="https://www.mckinsey.com.cn/ai%E6%99%BA%E8%83%BD%E4%BD%93%E7%BB%84%E7%BB%87%EF%BC%9A-5%E4%B8%AA%E4%BA%BA%E7%AE%A1%E7%90%86100%E4%B8%AA%E6%99%BA%E8%83%BD%E4%BD%93%E5%91%98%E5%B7%A5/" target="_blank" rel="noopener">麦肯锡：银行落地「智能体工厂」，5 个人管理 100 个智能体员工</a><div class="hs-meta">麦肯锡 · 2026.08.12</div><div class="hs-sum">某全球性银行以 10 支智能体团队负责客户身份核验；另一家银行在人工监督下由 AI 改造老旧核心系统，时间与人力投入最多减少 50%，业务边际成本趋近算力成本。</div></div>
+                            <!-- HOTSPOTS-FIN:END -->
+                        </div>
+                        <div class="hs-panel" id="hs-panel-ins">
+                            <!-- HOTSPOTS-INS:START -->
+                            <div class="hs-item"><a class="hs-title" href="https://m.10jqka.com.cn/20260807/c678758187.shtml" target="_blank" rel="noopener">中科软提出保险 AI 原生转型：五层「驾驭工程」治理闭环</a><div class="hs-meta">同花顺 · 2026.08.07</div><div class="hs-sum">寿险核心系统实现自然语言驱动核保、理赔等核心操作，让 AI 从外挂工具变为核心系统内生能力；财险论坛提出智能体建设四要素：语义骨架、驾驭工程、精准计算、安全可控。</div></div>
+                            <div class="hs-item"><a class="hs-title" href="https://m.sohu.com/a/1060679430_121198147" target="_blank" rel="noopener">马云旗下云锋基金 2.34 亿港元投资 AI 保险公司 Corgi</a><div class="hs-meta">搜狐 · 2026.08.09</div><div class="hs-sum">旧金山初创 Corgi 用大模型与智能体重构商业保险的核保评估、理赔审核与保单管理，三个月估值翻近四倍，跻身 40 亿美元独角兽。</div></div>
+                            <div class="hs-item"><a class="hs-title" href="http://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=601628&id=12016995" target="_blank" rel="noopener">中国人寿 2025 年报：数智化服务赔案占比超 75%</a><div class="hs-meta">新浪财经 · 2026.08.13</div><div class="hs-sum">一站式理赔直付超 530 万件，主动理赔智能识别并提示 68 万人次；AI 辅助编程代码占比达 30%，大模型赋能代理人客户年拜访量同比增长超 15%。</div></div>
+                            <!-- HOTSPOTS-INS:END -->
+                        </div>
+                        <div class="hs-panel" id="hs-panel-tech">
+                            <!-- HOTSPOTS-TECH:START -->
+                            <div class="hs-item"><a class="hs-title" href="https://database.caixin.com/2026-08-13/102473629.html" target="_blank" rel="noopener">腾讯：计划今年晚些时候推出前沿大模型 Hy4，对标 DeepSeek 与 Kimi</a><div class="hs-meta">财新 · 2026.08.13</div><div class="hs-sum">腾讯高管称 AI 投资聚焦基础设施，混元基础模型与办公智能体 WorkBuddy 初见进展；刘炽平表示即便最坏情况也可出租算力收回成本，下行有保护。</div></div>
+                            <div class="hs-item"><a class="hs-title" href="https://www.163.com/dy/article/L3ODMN3505566T0A.html" target="_blank" rel="noopener">大厂 AI 办公进入整合决战：腾讯、阿里、字节同步收编产品线</a><div class="hs-meta">网易·AI大模型工场 · 2026.08.07</div><div class="hs-sum">腾讯将 QClaw 并入 WorkBuddy，阿里把三款 Agent 产品整合为千问办公交钉钉统管，字节推进豆包与飞书深度融合，办公智能体之争转向商业博弈。</div></div>
+                            <div class="hs-item"><a class="hs-title" href="https://www.caixin.com/2026-08-13/102473595.html" target="_blank" rel="noopener">荣耀发布 9999 元 Robot Phone，AI 终端生态转型动作密集</a><div class="hs-meta">财新 · 2026.08.13</div><div class="hs-sum">号称具备多模态交互能力，Agentic OS 内核支持长指令遵循与跨应用执行；CEO 李健称 Robot Phone 是品牌高端化的开始，9 月 Magic9 将具备智能体能力。</div></div>
+                            <!-- HOTSPOTS-TECH:END -->
+                        </div>
+                        <div class="magazine-updated">✦ 热点一周速览</div>
                     </div>
                 </div>
             </div>
@@ -1538,10 +1582,17 @@
         function resetTarotFlips() {
             document.querySelectorAll('#page-lingxi .tarot-card.flipped').forEach(c => c.classList.remove('flipped'));
         }
-        // AI随想：移动端触摸展开
-        document.querySelectorAll('.muse-item').forEach(el => {
-            el.addEventListener('touchstart', () => el.classList.toggle('touched'), { passive: true });
-        });
+        // AI随想 & 热点追踪：移动端触摸展开（事件委托，锚点内容更新后依然生效）
+        document.addEventListener('touchstart', (e) => {
+            const el = e.target.closest('.muse-item, .hs-item');
+            if (el && !e.target.closest('a')) el.classList.toggle('touched');
+        }, { passive: true });
+
+        // 热点追踪：Tab 切换
+        function switchHsTab(key) {
+            document.querySelectorAll('.hs-tab').forEach(t => t.classList.toggle('active', t.dataset.hs === key));
+            document.querySelectorAll('.hs-panel').forEach(p => p.classList.toggle('active', p.id === 'hs-panel-' + key));
+        }
 
         // ===== 页面导航系统 =====
         let currentPage = 'cover'; const pageHistory = ['cover'];
